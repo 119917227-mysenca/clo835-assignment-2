@@ -16,15 +16,15 @@ spec:
                 app: mysql
         spec:
             containers:
-                - image: 407373101635.dkr.ecr.us-east-1.amazonaws.com/assignment-1-db:v0.1
-                name: mysql-db
-                env:
-                    - name: MYSQL_ROOT_PASSWORD
-                    valueFrom:
-                        secretKeyRef:
-                            name: db-secrets
-                            key: password
-                ports:
-                    - containerPort: 3306
+                -   image: 407373101635.dkr.ecr.us-east-1.amazonaws.com/assignment-1-db:v0.1
+                    name: mysql-db
+                    env:
+                        -   name: MYSQL_ROOT_PASSWORD
+                            valueFrom:
+                                secretKeyRef:
+                                    name: db-secrets
+                                    key: password
+                    ports:
+                        - containerPort: 3306
             dnsPolicy: ClusterFirst
             restartPolicy: Always
