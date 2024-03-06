@@ -6,7 +6,7 @@ metadata:
     name: mysql-db
     namespace: sqldb
 spec:
-    replicas: 3
+    replicas: 1
     selector:
         matchLabels:
             app: mysql

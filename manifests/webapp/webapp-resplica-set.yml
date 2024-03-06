@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+    labels:
+        app: employees
+        version: v1
+    name: webapp
+    namespace: webapp
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+            app: employees
+            version: v1
+    template:
+        metadata:
+            labels:
+                app: employees
+                version: v1
+        spec:
+            containers:
+                -   image: 407373101635.dkr.ecr.us-east-1.amazonaws.com/assignment-1-app:v0.1
+                    name: webapp
+                    env:
+                        -   name: DBHOST
+                            value: "10.244.0.6"
+                        -   name: DBPORT
+                            value: "3306"
+                        -   name: DATABASE
+                            value: "employees"
+                        -   name: DBPWD
+                            valueFrom:
+                              secretKeyRef:
+                                name: db-secrets
+                                key: password
+                        -   name: DBUSER
+                            valueFrom:
+                              secretKeyRef:
+                                name: db-secrets
+                                key: user
+                    ports:
+                        - containerPort: 8080
+            dnsPolicy: ClusterFirst
+            restartPolicy: Always
