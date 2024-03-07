@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: deployment-db
+    name: mysql-db
     namespace: sqldb
     labels:
         app: mysql
@@ -16,7 +16,7 @@ spec:
                 app: mysql
         spec:
             containers:
-            -   name: deployment-db
+            -   name: mysql-db
                 image: 407373101635.dkr.ecr.us-east-1.amazonaws.com/assignment-1-db:v0.1
                 env:
                     -   name: MYSQL_ROOT_PASSWORD
